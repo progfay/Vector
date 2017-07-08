@@ -1,15 +1,19 @@
+package Vector;
+
+import Vector2D;
+
 class Vector3D {
 
   /* Field */
 
   // the x component of the vector.
-  float x;
+  public float x;
 
   // the y component of the vector.
-  float y;
+  public float y;
 
   // the z component of the vector.
-  float z;
+  public float z;
 
 
   /* Constructor */
@@ -138,7 +142,7 @@ class Vector3D {
   static public Vector3D div(Vector3D v, float n) {
     return new Vector3D(v.x/n, v.y/n, v.z/n);
   }
-  
+
   // return distance of this vector and another vector
   public float dist(Vector3D v) {
     float dx = this.x - v.x;
@@ -153,7 +157,7 @@ class Vector3D {
     float dz = v1.z - v2.z;
     return (float) Math.sqrt(dx*dx + dy*dy + dz*dz);
   }
-  
+
   // return dot of this vector and another vector
   public float dot(Vector3D v) {
     return this.x*v.x + this.y*v.y + this.z*v.z;
@@ -162,7 +166,7 @@ class Vector3D {
   static public float dot(Vector3D v1, Vector3D v2) {
     return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
   }
-  
+
   // return cross vector of this vector and another vector
   public Vector3D cross(Vector3D v) {
     return new Vector3D(
@@ -179,7 +183,7 @@ class Vector3D {
       v1.x*v2.y - v2.x*v1.y
       );
   }
-  
+
   // reverse vector
   public Vector3D negative() {
     this.x *= -1;
@@ -191,7 +195,7 @@ class Vector3D {
   static public Vector3D negative(Vector3D v) {
     return new Vector3D(-v.x, -v.y, -v.z);
   }
-  
+
   // normalize(unit vector)
   public Vector3D normalize() {
     float m = this.mag();
@@ -203,7 +207,7 @@ class Vector3D {
     float m = v.mag();
     return (m == 0 || m == 1 ? new Vector3D(v) : v.div(m));
   }
-  
+
   // change the magnitude without changing the direction
   public Vector3D setMag(float len) {
     return this.normalize().mult(len);
@@ -212,7 +216,7 @@ class Vector3D {
   static public Vector3D setMag(Vector3D v, float len) {
     return Vector3D.normalize(v).mult(len);
   }
-  
+
   // limit the magnitude of vector
   public Vector3D limit(float max) {
     if (this.magSq() > max*max) this.setMag(max);
@@ -238,7 +242,7 @@ class Vector3D {
       (float) (v.y*Math.sin(theta) + v.z*Math.cos(theta))
       );
   }
-  
+
   // rotate vector around Y axis
   public Vector3D rotateY(float theta) {
     this.x = (float) (this.z*Math.sin(theta) + this.x*Math.cos(theta));
@@ -253,7 +257,7 @@ class Vector3D {
       (float) (v.z*Math.sin(theta) - v.x*Math.sin(theta))
       );
   }
-  
+
   // rotate vector around Z axis
   public Vector3D rotateZ(float theta) {
     this.x = (float) (this.x*Math.cos(theta) - this.y*Math.sin(theta));
@@ -268,7 +272,7 @@ class Vector3D {
       v.z
       );
   }
-  
+
   // rotate vector by X-Y-Z
   public Vector3D rotate(float alpha, float beta, float gamma) {
     return this.rotateX(alpha).rotateY(beta).rotateZ(gamma);
@@ -277,7 +281,7 @@ class Vector3D {
   static public Vector3D rotate(Vector3D v, float alpha, float beta, float gamma) {
     return Vector3D.rotateX(v, alpha).rotateY(beta).rotateZ(gamma);
   }
-  
+
   // roll vector by roll-pitch-yaw
   public Vector3D rolling(float roll, float pitch, float yaw) {
     float r_sin = (float) Math.sin(roll);
@@ -308,7 +312,7 @@ class Vector3D {
       (- 1 * p_sin) * v.x +                   (p_cos*y_sin) * v.y +                   (p_cos*y_cos) * v.z
       );
   }
-  
+
   // linear interpolate the vector to another vector
   static public Vector3D lerp(Vector3D start, Vector3D end, float amt) {
     return new Vector3D(
@@ -317,7 +321,7 @@ class Vector3D {
       start.z + (start.z - end.z) * amt
       );
   }
-  
+
   // return angle between one vector and antoher vector
   static public float angleBetween(Vector3D v1, Vector3D v2) {
     if (v1.x == 0 && v1.y == 0 && v1.z == 0 ) return 0.0f;
@@ -330,7 +334,7 @@ class Vector3D {
     }
     return (float) Math.acos(amt);
   }
-  
+
   // return the vector reflected by this vector
   public Vector3D reflect(Vector3D n) {
     return Vector3D.sub(this, n.mult(2 * Vector3D.dot(this, n)));
@@ -339,7 +343,7 @@ class Vector3D {
   static public Vector3D reflect(Vector3D v, Vector3D n) {
     return Vector3D.sub(v, n.mult(2 * Vector3D.dot(v, n)));
   }
-  
+
   // return the vector refracted by this vector(refractive index : eta)
   public Vector3D refract(Vector3D n, float eta) {
     float dot = Vector3D.dot(this, n);

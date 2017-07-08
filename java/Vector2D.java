@@ -5,27 +5,27 @@ import Vector3D;
 class Vector2D {
 
   /* Field */
-  
+
   // the x component of the vector
-  float x;
-  
+  public float x;
+
   // the y component of the vector
-  float y;
-  
+  public float y;
+
   /* Constructor */
-  
+
   // for an empty vector
   public Vector2D() {
     this.x = 0;
     this.y = 0;
   }
-  
+
   // for a 2D vector
   public Vector2D(float _x, float _y) {
     this.x = _x;
     this.y = _y;
   }
-  
+
   // for a 2D vector duplicate 2D vector
   public Vector2D(Vector2D v) {
     this.x = v.x;
@@ -37,17 +37,17 @@ class Vector2D {
     double angle = Math.random() * Math.PI * 2;
     return new Vector2D((float)Math.cos(angle), (float)Math.sin(angle));
   }
-  
+
   // return new 2D unit vector from an angle
   static public Vector2D fromAngle(float angle) {
     return new Vector2D((float)Math.cos(angle), (float)Math.sin(angle));
   }
-  
+
   // return magnitude of vector
   public float mag() {
     return (float) Math.sqrt(this.x*this.x + this.y*this.y);
   }
-  
+
   // return square magnitude of vector
   public float magSq() {
     return (this.x*this.x + this.y*this.y);
@@ -118,7 +118,7 @@ class Vector2D {
     if (n == 0) throw new ArithmeticException("/ by zero");
     return new Vector2D(v.x/n, v.y/n);
   }
-  
+
   // return distance of this vector and another vector
   public float dist(Vector2D v) {
     float dx = this.x - v.x;
@@ -131,7 +131,7 @@ class Vector2D {
     float dy = v1.y - v2.y;
     return (float) Math.sqrt(dx*dx + dy*dy);
   }
-  
+
   // return dot of this vector and another vector
   public float dot(Vector2D v) {
     return this.x*v.x + this.y*v.y;
@@ -140,7 +140,7 @@ class Vector2D {
   static public float dot(Vector2D v1, Vector2D v2) {
     return v1.x*v2.x + v1.y*v2.y;
   }
-  
+
   // return cross vector of this vector and another vector
   public Vector3D cross(Vector2D v) {
     return new Vector3D(0.0f, 0.0f, this.x*v.y - v.x*this.y);
@@ -149,7 +149,7 @@ class Vector2D {
   static public Vector3D cross(Vector2D v1, Vector2D v2) {
     return new Vector3D(0.0f, 0.0f, v1.x*v2.y - v2.x*v1.y);
   }
-  
+
   // reverse vector
   public Vector2D negative() {
     this.x *= -1;
@@ -160,7 +160,7 @@ class Vector2D {
   static public Vector2D negative(Vector2D v) {
     return new Vector2D(-v.x, -v.y);
   }
-  
+
   // normalize(unit vector)
   public Vector2D normalize() {
     float m = this.mag();
@@ -175,7 +175,7 @@ class Vector2D {
     float m = v.mag();
     return (m == 0 || m == 1 ? new Vector2D(v) : v.div(m));
   }
-  
+
   // change the magnitude without changing the direction
   public Vector2D setMag(float len) {
     return this.normalize().mult(len);
@@ -184,7 +184,7 @@ class Vector2D {
   static public Vector2D setMag(Vector2D v, float len) {
     return Vector2D.normalize(v).mult(len);
   }
-  
+
   // limit the magnitude of vector
   public Vector2D limit(float max) {
     if (this.magSq() > max*max) this.setMag(max);
@@ -195,12 +195,12 @@ class Vector2D {
     if (v.magSq() <= max*max) return new Vector2D(v);
     return Vector2D.setMag(v, max);
   }
-  
+
   // return the angle of rotation for this vector
   public float heading() {
     return (float) Math.atan2(this.y, this.x);
   }
-  
+
   // rotate this vector
   public Vector2D rotate(float theta) {
     this.x = (float) (this.x*Math.cos(theta) - this.y*Math.sin(theta));
@@ -214,7 +214,7 @@ class Vector2D {
       (float) (v.x*Math.sin(theta) + v.y*Math.cos(theta))
       );
   }
-  
+
   // linear interpolate the vector to another vector
   static public Vector2D lerp(Vector2D start, Vector2D end, float amt) {
     return new Vector2D(
@@ -222,7 +222,7 @@ class Vector2D {
       start.y + (start.y - end.y) * amt
       );
   }
-  
+
   // return angle between one vector and antoher vector
   static public float angleBetween(Vector2D v1, Vector2D v2) {
     if (v1.x == 0 && v1.y == 0) return 0.0f;
